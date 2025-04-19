@@ -99,23 +99,23 @@
 
       <form id="quiz-form" onsubmit="return handleSubmit(event)">
         <div class="option">
-          <input type="radio" id="quote1" name="answer" value="mj" />
+          <input type="radio" id="quote1" name="answer" value="i" />
           <label for="quote1">"@quotative"</label>
         </div>
 
         <div class="option">
-          <input type="radio" id="quote2" name="answer" value="lebron" />
-          <label for="quote2">"@someone not named quotative"</label>
+          <input type="radio" id="quote2" name="answer" value="u" />
+          <label for="quote2">"@flasher"</label>
         </div>
 
         <div class="option">
-          <input type="radio" id="quote3" name="answer" value="kobe" />
+          <input type="radio" id="quote3" name="answer" value="z" />
           <label for="quote3">"@notquotative"</label>
         </div>
 
         <div class="option">
-          <input type="radio" id="quote4" name="answer" value="conor" />
-          <label for="quote4">"@not quotative again"</label>
+          <input type="radio" id="quote4" name="answer" value="s" />
+          <label for="quote4">"@ubtg"</label>
         </div>
 
         <div id="captcha-container">
@@ -167,7 +167,7 @@
           return false;
         }
 
-        if (selected.value === "mj") {
+        if (selected.value === "i") {
           const key = generateSecureKey();
           const encodedKey = encodeURIComponent(key);
           window.location.href = "quiz.html";
