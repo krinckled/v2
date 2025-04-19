@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>password</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #dbeafe, #fef3c7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        transition: box-shadow 0.3s ease;
+        position: relative;
+      }
+      .container:hover {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #1e3a8a;
+      }
+      .field {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #374151;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+      .copy-btn {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #2563eb;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-decoration: underline;
+        transition: color 0.2s;
+      }
+      .copy-btn:hover {
+        color: #1d4ed8;
+      }
+      .combo {
+        background: #f3f4f6;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        font-weight: 600;
+        color: #111827;
+        font-size: 14px;
+      }
+      .copied-msg {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #d1fae5;
+        color: #065f46;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 500;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .copied-msg.show {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>free drops @quotative</h2>
+      <div class="field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" value="john" oninput="updateCombo()" />
+        <button class="copy-btn" onclick="copyToClipboard('username')">
+          Copy Username
+        </button>
+      </div>
+      <div class="field">
+        <label for="password">Password:</label>
+        <input type="text" id="password" value="john" oninput="updateCombo()" />
+        <button class="copy-btn" onclick="copyToClipboard('password')">
+          Copy Password
+        </button>
+      </div>
+      <div class="field">
+        <label>Combo (user:pass):</label>
+        <div class="combo" id="combo">john:john</div>
+        <button class="copy-btn" onclick="copyToClipboard('combo')">
+          Copy Combo
+        </button>
+      </div>
+      <div id="copied-msg" class="copied-msg">Copied to clipboard!</div>
+    </div>
+
+    <script>
+      function updateCombo() {
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
+        document.getElementById("combo").textContent =
+          user && pass ? `${user}:${pass}` : "";
+      }
+
+      function copyToClipboard(field) {
+        let text = "";
+        if (field === "username")
+          text = document.getElementById("username").value;
+        else if (field === "password")
+          text = document.getElementById("password").value;
+        else if (field === "combo")
+          text = document.getElementById("combo").textContent;
+
+        if (text) {
+          navigator.clipboard.writeText(text).then(() => {
+            const msg = document.getElementById("copied-msg");
+            msg.classList.add("show");
+            setTimeout(() => msg.classList.remove("show"), 1500);
+          });
+        }
+      }
+
+      updateCombo();
+    </script>
+  </body>
+</html>

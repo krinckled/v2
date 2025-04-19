@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>v2 giveaways</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 320px;
+        text-align: center;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .captcha-box {
+        margin: 20px 0;
+      }
+
+      .rotate-img {
+        width: 150px;
+        transition: transform 0.3s;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 2px solid #ddd;
+      }
+
+      .error {
+        color: red;
+      }
+
+      .success {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>@quotative</h2>
+      <form id="captchaForm">
+        <div class="captcha-box">
+          <p>rotate image correctly:</p>
+          <img
+            id="captchaImage"
+            class="rotate-img"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS75ovDJ2RS4X4U6HD7cx0gldks3tnGON7SvQ&s"
+            alt="captcha image"
+          />
+          <br />
+          <button type="button" onclick="rotateImage()">Rotate</button>
+        </div>
+
+        <button type="submit">Continue</button>
+        <p id="message" class="error"></p>
+      </form>
+    </div>
+
+    <script>
+      const img = document.getElementById("captchaImage");
+      const message = document.getElementById("message");
+      let rotation = 0;
+
+      const startRotation = [90, 180, 270][Math.floor(Math.random() * 3)];
+      rotation = startRotation;
+      img.style.transform = `rotate(${rotation}deg)`;
+
+      function rotateImage() {
+        rotation = (rotation + 90) % 360;
+        img.style.transform = `rotate(${rotation}deg)`;
+      }
+
+      document
+        .getElementById("captchaForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (rotation === 0) {
+            message.className = "success";
+            message.textContent = "redirecting...";
+            setTimeout(() => {
+              window.location.href = "test.html";
+            }, 1000);
+          } else {
+            message.className = "error";
+            message.textContent = "you did it wrong";
+          }
+        });
+    </script>
+  </body>
+</html>
