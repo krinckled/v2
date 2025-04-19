@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>@quotative</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f7f7f7;
+        padding: 40px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .quiz-container {
+        background-color: #fff;
+        padding: 40px;
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      .option {
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+      }
+
+      .option input[type="radio"] {
+        margin-right: 10px;
+      }
+
+      .g-recaptcha {
+        margin-top: 20px;
+      }
+
+      #submit-btn {
+        margin-top: 20px;
+        padding: 12px 25px;
+        font-size: 18px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #submit-btn:hover {
+        background-color: #45a049;
+      }
+
+      .error {
+        color: red;
+        margin-top: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quiz-container">
+      <h1>Who is the greatest of all time?</h1>
+
+      <form id="quiz-form" onsubmit="return handleSubmit(event)">
+        <div class="option">
+          <input type="radio" id="quote1" name="answer" value="mj" />
+          <label for="quote1">"@quotative"</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" id="quote2" name="answer" value="lebron" />
+          <label for="quote2">"@someone not named quotative"</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" id="quote3" name="answer" value="kobe" />
+          <label for="quote3">"@notquotative"</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" id="quote4" name="answer" value="conor" />
+          <label for="quote4">"@not quotative again"</label>
+        </div>
+
+        <div
+          class="g-recaptcha"
+          data-sitekey="6LcdmR0rAAAAAFbAqRPU9zuj8CdWnc0zv-z2Pm0l"
+          data-callback="onCaptchaSuccess"
+        ></div>
+
+        <button type="submit" id="submit-btn" disabled>Submit</button>
+        <div class="error" id="error-msg"></div>
+      </form>
+    </div>
+
+    <script>
+      let captchaVerified = false;
+
+      function onCaptchaSuccess() {
+        captchaVerified = true;
+        document.getElementById("submit-btn").disabled = false;
+      }
+
+      function generateSecureKey(length = 12) {
+        const chars =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+        let result = "";
+        for (let i = 0; i < length; i++) {
+          result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        const selected = document.querySelector('input[name="answer"]:checked');
+        const errorMsg = document.getElementById("error-msg");
+
+        if (!selected) {
+          errorMsg.textContent = "Please choose an answer.";
+          return false;
+        }
+
+        if (!captchaVerified) {
+          errorMsg.textContent = "Please complete the CAPTCHA.";
+          return false;
+        }
+
+        if (selected.value === "mj") {
+          const key = generateSecureKey();
+          const encodedKey = encodeURIComponent(key);
+          window.location.href = "UsingThisUrlOneTimePleaseDontSnipe.html";
+        } else {
+          errorMsg.textContent = "no retard ahahhahaah";
+        }
+
+        return false;
+      }
+    </script>
+  </body>
+</html>
