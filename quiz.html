@@ -55,10 +55,19 @@
       }
 
       #captcha-answer {
-        padding: 8px;
+        padding: 10px 15px;
         font-size: 16px;
-        width: 100px;
-        text-align: center;
+        width: 160px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      #captcha-answer:focus {
+        border-color: #4caf50;
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
       }
 
       #submit-btn {
@@ -148,12 +157,12 @@
         const errorMsg = document.getElementById("error-msg");
 
         if (!selected) {
-          errorMsg.textContent = "Please choose an answer.";
+          errorMsg.textContent = "choose a answer you retard";
           return false;
         }
 
         if (parseInt(captchaInput) !== correctCaptchaAnswer) {
-          errorMsg.textContent = "Incorrect CAPTCHA. Try again.";
+          errorMsg.textContent = "are you sped?";
           generateCaptcha();
           return false;
         }
@@ -169,7 +178,6 @@
         return false;
       }
 
-      // Init CAPTCHA on page load
       window.onload = generateCaptcha;
     </script>
   </body>
